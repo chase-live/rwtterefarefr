@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Universe. by chase</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    background: #000;
+    color: white;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Keep all stars within viewport */
+  }
+
+  /* Sidebar */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 60px;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+    z-index: 20;
+  }
+  #sidebar button, #sidebar a {
+    background: none;
+    border: none;
+    color: #bbb;
+    font-size: 24px;
+    cursor: pointer;
+    width: 40px; height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+  }
+  #sidebar button:hover, #sidebar a:hover {
+    background: #5e1eff;
+    color: white;
+  }
+  #sidebar a.active {
+    background: #5e1eff;
+    color: white;
+  }
+
+  /* Bell notification */
+  #notification {
+    position: fixed;
+    bottom: 1rem;
+    left: 70px;
+    background: #5e1eff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #5e1effaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 30;
+  }
+  #notification::after {
+    content: '5';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #e04f5f;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Main content */
+  #main {
+    margin-left: 60px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    padding: 0 20px; /* Add padding for mobile views */
+  }
+
+  /* Background purple glow */
+  #purple-glow {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, #8b2affcc 0%, transparent 70%);
+    filter: blur(140px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Stars */
+  #stars, #stars2, #stars3 {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: transparent;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Canvases themselves don't need additional styles beyond base */
+
+  /* Welcome text */
+  #welcome-text {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.1;
+    max-width: 700px;
+  }
+  #welcome-text strong {
+    color: #8b2aff;
+  }
+  /* blinking cursor */
+  #cursor {
+    display: inline-block;
+    background-color: #8b2aff;
+    margin-left: 2px;
+    width: 3px;
+    animation: blink 1s step-start infinite;
+  }
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  /* Subtitle */
+  #subtitle {
+    margin-top: 16px;
+    color: #ddd;
+    font-size: 18px;
+  }
+
+  /* Get Started button */
+  #btn-get-started {
+    margin-top: 24px;
+    background: linear-gradient(90deg, #5e1eff, #9f56ff);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 24px;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #9f56ffaa;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  #btn-get-started:hover {
+    background: linear-gradient(90deg, #9f56ff, #5e1eff);
+    box-shadow: 0 0 20px #c477ffcc;
+  }
+
+  /* Button icon */
+  #btn-get-started svg {
+    stroke: white;
+    stroke-width: 2;
+    width: 16px;
+    height: 16px;
+    fill: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div id="sidebar" aria-label="Main Navigation">
+  <a href="index.html" title="Home" class="active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 9l9-7 9 7"></path>
+      <path d="M9 22V12h6v10"></path>
+    </svg>
+  </a>
+  
+  <!-- Changed this from a button to an anchor tag pointing to games.html -->
+  <a href="games.html" title="Games">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+      <polyline points="2 17 12 22 22 17"></polyline>
+      <polyline points="2 12 12 17 22 12"></polyline>
+    </svg>
+  </a>
+
+  <button title="Apps" aria-pressed="false" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <rect x="3" y="3" width="7" height="7"></rect>
+      <rect x="14" y="3" width="7" height="7"></rect>
+      <rect x="14" y="14" width="7" height="7"></rect>
+      <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
+  </button>
+  <button title="Globe" aria-pressed="false" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="2" y1="12" x2="22" y2="12"></line>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+  </button>
+  <button title="Messages" aria-pressed="false" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+  <button title="Settings" aria-pressed="false" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l0 0a2 2 0 1 1-2.83 2.83l0 0a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-0.18a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l0 0a2 2 0 1 1-2.83-2.83l0 0a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h0.18a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l0 0a2 2 0 1 1 2.83-2.83l0 0a1.65 1.65 0 0 0 1.82.33h0.18a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v0.18a1.65 1.65 0 0 0 1 1.51h0.18a1.65 1.65 0 0 0 1.82-.33l0 0a2 2 0 1 1 2.83 2.83l0 0a1.65 1.65 0 0 0-.33 1.82v0.18a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-0.18a1.65 1.65 0 0 0-1.42 1z"></path>
+    </svg>
+  </button>
+  <button title="Discord" aria-pressed="false" tabindex="-1">
+    <svg viewBox="0 0 71 55" fill="none" xmlns="www.w3.org" aria-hidden="true" focusable="false">
+      <path fill="#5865F2" d="M60 4.5a58.8 58.8 0 00-14-4.3 41.1 41.1 0 00-1.9 4.3 54 54 0 00-16-0.1 41.7 41.7 0 00-2-4.2 59.6 59.6 0 00-14 4.3c-12.5 18.6-15.1 36.7-13.6 54.2a60 60 0 0017 6c1-1.2 1.9-2.5 2.6-3.9a48 48 0 01-7-3.2c1.3 0 2.5 0 3.6-0.2-6.9-2.3-9.5-7-9.5-7 1.4 0 2.7 0.5 3.8 1.3-4.1-1.4-5.7-4.3-5.7-4.3 1 1.2 2.2 2 3.6 2.6-2-1.1-3.3-3.6-3.3-3.6a28 28 0 003.8 2.1c9.3 5 19 3 19 3a42 42 0 0011-8.6c0-15.7 3.5-28.3 9-37z"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Bell notification -->
+<div id="notification" role="button" aria-label="Notifications"></div>
+
+<!-- Purple glow -->
+<div id="purple-glow"></div>
+
+<!-- Falling stars canvas layers -->
+<canvas id="stars"></canvas>
+<canvas id="stars2"></canvas>
+<canvas id="stars3"></canvas>
+
+<!-- Main content -->
+<div id="main" role="main">
+  <div>
+    <div id="welcome-text">
+      Welcome to <strong>universe.<span id="cursor"></span></strong>
+    </div>
+    <div id="subtitle">Start your journey today!</div>
+    <button id="btn-get-started" title="Get Started">
+        Get Started
+        <svg viewBox="0 0 24 24">
+            <polyline points="12 5 19 12 12 19"></polyline>
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+        </svg>
+    </button>
+  </div>
+</div>
+
+<!-- JavaScript for dynamic background and effects -->
+<script>
+    // 1. Starfield background effect (Same as before)
+    function stars() {
+      let stars = document.getElementById('stars');
+      let stars2 = document.getElementById('stars2');
+      let stars3 = document.getElementById('stars3');
+
+      function drawStars(canvas, count, spread, size, opacity) {
+        let ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        for (let i = 0; i < count; i++) {
+          let x = Math.random() * canvas.width;
+          let y = Math.random() * canvas.height;
+          let radius = Math.random() * size;
+
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          ctx.fill();
+        }
+      }
+      drawStars(stars, 300, 1, 0.9, 0.6);
+      drawStars(stars2, 100, 1, 1.3, 0.8);
+      drawStars(stars3, 50, 1, 1.8, 1);
+      window.addEventListener('resize', () => {
+        drawStars(stars, 300, 1, 0.9, 0.6);
+        drawStars(stars2, 100, 1, 1.3, 0.8);
+        drawStars(stars3, 50, 1, 1.8, 1);
+      });
+    }
+    stars();
+
+    // 2. Simple interactivity placeholder
+    document.getElementById('btn-get-started').addEventListener('click', () => {
+        alert('Journey started! (This is a placeholder action)');
+    });
+    document.getElementById('notification').addEventListener('click', () => {
+        alert('You have 5 new notifications!');
+    });
+</script>
+</body>
+</html>
