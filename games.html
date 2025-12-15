@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Universe. - Games</title>
+<style>
+  /* General styles matching the main site aesthetic */
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    background: #000;
+    color: white;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Container for the main content area, respecting the sidebar width */
+  #games-main-content {
+    margin-left: 60px;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: #8b2aff;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Styling for the game grid/cards */
+  .game-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .game-card {
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 200px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none; /* remove underline from anchor tag */
+    color: white;
+    display: block;
+  }
+
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(139, 42, 255, 0.5);
+  }
+
+  .game-image {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .game-info {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .game-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+</style>
+<!-- Include the original CSS styles for the sidebar and notification bell here so they load on this page too -->
+<style>
+  /* --- Copy of Sidebar and Notification CSS from index.html --- */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 60px;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+    z-index: 20;
+  }
+  #sidebar button, #sidebar a {
+    background: none;
+    border: none;
+    color: #bbb;
+    font-size: 24px;
+    cursor: pointer;
+    width: 40px; height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+  }
+  #sidebar button:hover, #sidebar a:hover {
+    background: #5e1eff;
+    color: white;
+  }
+  /* Mark the 'games' link as active on this page */
+  #sidebar a.active-games {
+    background: #5e1eff;
+    color: white;
+  }
+
+  #notification {
+    position: fixed;
+    bottom: 1rem;
+    left: 70px;
+    background: #5e1eff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #5e1effaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 30;
+  }
+  #notification::after {
+    content: '5';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #e04f5f;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* --- End of copied CSS --- */
+</style>
+</head>
+<body>
+
+<!-- Sidebar (Copied from index.html, adjusted active class) -->
+<div id="sidebar" aria-label="Main Navigation">
+  <a href="index.html" title="Home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 9l9-7 9 7"></path>
+      <path d="M9 22V12h6v10"></path>
+    </svg>
+  </a>
+  
+  <!-- This is now the active link for the Games page -->
+  <a href="games.html" title="Games" class="active-games">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+      <polyline points="2 17 12 22 22 17"></polyline>
+      <polyline points="2 12 12 17 22 12"></polyline>
+    </svg>
+  </a>
+
+  <button title="Apps" aria-pressed="false" tabindex="-1">
+    <!-- SVG code for Apps button goes here -->
+  </button>
+  <button title="Globe" aria-pressed="false" tabindex="-1">
+    <!-- SVG code for Globe button goes here -->
+  </button>
+   <button title="Messages" aria-pressed="false" tabindex="-1">
+     <!-- SVG code for Messages button goes here -->
+  </button>
+   <button title="Settings" aria-pressed="false" tabindex="-1">
+     <!-- SVG code for Settings button goes here -->
+  </button>
+   <button title="Discord" aria-pressed="false" tabindex="-1">
+     <!-- SVG code for Discord button goes here -->
+  </button>
+</div>
+<!-- End Sidebar -->
+
+<!-- Bell notification (Copied from index.html) -->
+<div id="notification" role="button" aria-label="Notifications"></div>
+
+
+<div id="games-main-content">
+  <h1>Popular Games</h1>
+
+  <div class="game-container">
+    
+    <!-- Game Card 1: Add your image source (src) and link (href) here -->
+    <a href="https://x1323.github.io/play/mc/" target="_blank" class="game-card">
+      <img src="https://x1323.github.io/images/mc.png" alt="Game 1 Title" class="game-image">
+      <div class="game-info">
+        <p class="game-title">Minecraft</p>
+      </div>
+    </a>
+
+    <!-- Game Card 2 -->
+    <a href="https://x1323.github.io/play/stickman/" target="_blank" class="game-card">
+       <img src="https://x1323.github.io/images/stackman.jpg" alt="Game 2 Title" class="game-image">
+      <div class="game-info">
+        <p class="game-title">Stickman Hook</p>
+      </div>
+    </a>
+
+    <!-- Game Card 3 -->
+    <a href="https://x1323.github.io/play/cookieclicker/" target="_blank" class="game-card">
+       <img src="https://x1323.github.io/images/cookieclicker.jpg" alt="Game 3 Title" class="game-image">
+      <div class="game-info">
+        <p class="game-title">Cookie Clicker</p>
+      </div>
+    </a>
+
+       <a href="https://x1323.github.io/play/ovo/" target="_blank" class="game-card">
+       <img src="https://x1323.github.io/images/ovo.png" alt="Game 3 Title" class="game-image">
+      <div class="game-info">
+        <p class="game-title">OvO</p>
+      </div>
+    </a>
+
+       <a href="https://x1323.github.io/play/tiny-fishing/" target="_blank" class="game-card">
+       <img src="https://x1323.github.io/images/thumb.png" alt="Game 3 Title" class="game-image">
+      <div class="game-info">
+        <p class="game-title">Tiny Fishing</p>
+      </div>
+    </a>
+
+    <!-- Add more game cards as needed, following the format above -->
+    
+  </div>
+</div>
+
+<!-- JavaScript for simple notification interactivity -->
+<script>
+    document.getElementById('notification').addEventListener('click', () => {
+        alert('You have 5 new notifications!');
+    });
+</script>
+
+</body>
+</html>
